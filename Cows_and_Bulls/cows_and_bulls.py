@@ -37,17 +37,23 @@ def find_cows_and_bulls(answer,guess,length):
 	
 	#print(list)
 	
-	for i in list:
-		if i == 0 :
-			bulls += 1;
-			del list1[list.index(i)]
-			del list2[list.index(i)]
 	
+	store = [];
+	for i in range (length):
+		if list[i] == 0:
+			bulls += 1;
+			store.append(i);
+			#print (i);
+		
 	
 	#print(list1,list2)
 	# find cows
-	for i in list2 : 
-		cows += list1.count(i);
+	for j in range (length) : 
+		for i in range (length):
+			if (list2[i] == list1[j]) and (j not in store) and (i not in store) and ( i!=j ) :
+				cows += 1;
+				store.append(j);
+
 			
 	print("Bulls:",bulls,"Cows:",cows)
 	print("\n")
@@ -107,7 +113,7 @@ while True:
 	if guess == answer:
 		print("YaY you win!!\n");
 	else :
-		print("Better luck next time!!");
+		print("The Answer was",answer,"\nBetter luck next time!!");
 	
 	inp = input("Wanna play again??...Press N to quit and any other key to continue: \n")
 	if inp == "N" or inp == "n":
